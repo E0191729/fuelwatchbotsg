@@ -54,7 +54,7 @@ def handle(msg):
         bot.sendMessage(chat_id, "Please enter a valid command such as:")
         bot.sendMessage(chat_id, "\n /roll \n /hi \n /fuel \n /deal \n /location \n /time \n /table")
 
-bot = telepot.Bot('593677738:AAGYdzAvS4vWGQlXZvytTrI0X78s7sl8MzM')
+bot = telepot.Bot('')
 
 MessageLoop(bot, handle).run_as_thread()
 print ('I am listening ...')
