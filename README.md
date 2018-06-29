@@ -1,4 +1,4 @@
-# Natalia, a Telegram Administrative assistant bot by @whalepoolbtc - https://whalepool.io   
+# Fuel Watch Bot (SG)
 
 A simple telegram bot to  [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 
