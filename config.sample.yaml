@@ -1,16 +1,16 @@
 
 # The username of your bot as set with the botfather
-NATALIA_BOT_USERNAME: "@My_Natalia_Bot"
+NATALIA_BOT_USERNAME: "@Botname"
 
 # The bot token supplied by botfather 
-NATALIA_BOT_TOKEN: "my-botfather-token"
+NATALIA_BOT_TOKEN: "apitoken"
 
 # The telegram Id of the bot owner
-BOT_OWNER_ID: 123456789
+BOT_OWNER_ID: Telegram_id
 
 # Admin Telegram Ids
 ADMINS:
-  - 123456789  # my-telegram-user-id
+  - Telegram_id # my-telegram-user-id
 
 
 # Stop words for wordcloud 
@@ -83,8 +83,7 @@ MESSAGES:
 
   # The message displayed to new users when they join your room
   welcome:
-   - "Welcome %s, I'm Natalia, group secretary. Please PM (@WPrules_bot) see chat rules."
-   - "Hi %s, welcome to the group"
+   - "Hi %s, welcome to the the Fuel Watch Bot"
 
   # A special welcome message for an individually special room 
   welcome_special: 'Welcome %s, this is a special chat group with a special welcome message'
@@ -93,7 +92,7 @@ MESSAGES:
   goodbye:
    - "Smells better without ya %s"
    - "The average net worth of this group just shot up when %s left"
-   - "goodbye %s. It was fun whilte it lasted"
+   - "goodbye %s. It was fun while it lasted"
    - "see ya %s, my sweet love"
 
   # If someone tries to use a command for the bot in a public channel
@@ -104,32 +103,27 @@ MESSAGES:
 
   # The 'welcome' message when users first initiate pm with the bot
   start: >
-   Hi %s, Welcome to X
+   Hi %s, Welcome to SgFuelWatch
    Please click one of the links to see how i can help you:
-   /rules  - See Whalepool Rules
-   /about - about us
-   /admins - See list of admins to contact for help.
-   /teamspeak - How to connect to teamspeak
-   /teamspeakbadges - Badges rules & guides for teamspeak
-   /telegram - Our telegram Channels
-   /livestream - Listen to use live on youtube
-   /exchanges - See where we recommend to trade
-   /donation - Make a donation
+   /start - *Welcome message*
+   /about - about us*the purpose of the App and how to use it*
+   /admins - See list of admins to contact for help*about the developers*.
+   /location - Send location to the bot
+   /price - Get todays' petrol price list
+   /comment - Leave your Feedback
 
   # The 'admin' extra control pannel welcome message
   admin_start: >
    %s, this is your admin control:
-   /topstickers - posts the top 3 stickers from the last 3 days into the main room chat
-   /topgif - post the top gif to whalepool + feed
-   /topgifposters - post who are the top 5 gif posters 
-   /todayinwords - Today in words...
-   /todaysusers - Wordcloiud of whos active today
-   /promotets 'message' - spam / promote teamspeak with a specified message.
-   /shill - spam / promote various exchanges.
    /commandstats - get the command stats since the start of the month
+   /locationstats - get the location stats since the start of the month
    /joinstats - get the join stats since the start of the month
-   /whalepooloverprice - list the user gifs, user messages and user joins per hour over price  
-
+   /liststations - get the full list of petrol slations
+   /listadmin - List all the admins
+   /getlog -get the full log all the events
+   /todaysusers - get todays users
+   /promotets 'message' - spam / promote with a specified message.
+   
   # About page
   about: > 
    *About X*
@@ -148,56 +142,18 @@ MESSAGES:
       adminOf: "Room B and C "
       about  : "this is blah about username2"
 
-  # Rules
-  rules: > 
-   *Rules*
- 
-   blah rules blah 
-   
-   /start - to go back to home
-
   # Teamspeak info request 
-  teamspeak: > 
-   Blah teamspeak blah 
+  comment: > 
+   Blah comment blah 
    
    /start - to go back to home
 
-
-  # Telegram info request
-  telegram: > 
-   Blah telegram blah 
+  # Price info request
+  price: > 
+   Blah price blah 
    
    /start - to go back to home
 
-  # Livestream info request
-  livestream: > 
-   Blah livestream blah 
-   
-   /start - to go back to home
-
-  # Exchanges info request
-  exchanges: >
-   Blah exchanges blah 
-
-   /start - to go back to home
-
-  # Shill exchanges / shill links
-  shill: > 
-   Blah my shill links blah
-
-  teamspeakbadges: > 
+  # Location message
+  location: > 
    Blah teamspeak badges blah
-
-  fomobot: > 
-   Blah fomobot blah 
-
-   /start - to go back to home
-
-
-  donate: > 
-   If you would like to support Whalepool.io, please donate to:
-   Please note, for a 'financial contributor' badge on Teamspeak, the minimium donation is 0.1 btc.  
-   
-   Bitcoin: 175oRbKiLtdY7RVC8hSX7KD69WQs8PcRJA
-   
-   Please be sure to let us know you donated :)
