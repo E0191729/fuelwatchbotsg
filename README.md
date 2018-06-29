@@ -1,6 +1,6 @@
 # Natalia, a Telegram Administrative assistant bot by @whalepoolbtc - https://whalepool.io   
 
-A simple telegram bot to help with the moderation of the telegram channels utilizing [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+A simple telegram bot to  [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 
 ### Features  
 - Start / Welcome console with a selection of prebuild simple messages/pages  
@@ -36,7 +36,3 @@ You will have to edit/set some of the rooms under `natalia.py` for your room id'
 ### Run
 To run:  
 `python3.6 natalia.py`
-
-For more info join [@whalepoolbtc](https://t.me/whalepoolbtc) on telegram   
-
-![Profile pic](http://i.imgur.com/iIUSRDG.jpg)
