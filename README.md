@@ -1,20 +1,23 @@
 # Fuel Watch Bot (SG)
 
-A simple telegram bot to  [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+A simple telegram bot built with [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) to track down the best prices of fuel in your area!
 
-### Features  
+### Commands 
 -
   
 
 ### Requirements
-1) Mongodb  
-2) Install pip requirements `sudo pip3.6 install -r requirements.pip`    
 
-### Setup config
-`cp config.sample.yaml config.yaml`  
-Edit the config.yaml file accordingly  
-You will have to edit/set some of the rooms under `natalia.py` for your room id's and feed room ids etc  
 
-### Run
+### Setup Config
+
+
+### Usage
 To run:  
-`python3.6 natalia.py`
+`python3.6 .py`
+
+### Credits
+
+
+### Contact
+You can open an issue here to contact us of any bugs!
