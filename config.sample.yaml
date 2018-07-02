@@ -1,12 +1,11 @@
-
 # The username of your bot as set with the botfather
-NATALIA_BOT_USERNAME: "@Botname"
+FUELWATCHSG_BOT_USERNAME: "@Botname"
 
 # The bot token supplied by botfather 
-NATALIA_BOT_TOKEN: "apitoken"
+FUELWATCHSG_BOT_TOKEN: "apitoken"
 
 # The telegram Id of the bot owner
-BOT_OWNER_ID: Telegram_id
+BOT_OWNER_ID: Telegram_id # my-telegram-user-id
 
 # Admin Telegram Ids
 ADMINS:
