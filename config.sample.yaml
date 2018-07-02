@@ -12,73 +12,6 @@ BOT_OWNER_ID: Telegram_id
 ADMINS:
   - Telegram_id # my-telegram-user-id
 
-
-# Stop words for wordcloud 
-WORDCLOUD_STOPWORDS: 
-  - dont
-  - include
-  - these
-  - words
-  - in 
-  - the
-  - wordcloud 
-
-# Forward URLS
-# URLS matching this regex will look to be forwarded to your 'feed' room
-FORWARD_URLS: 'bloomberg.com|tradingview.com|coindesk.com'
-
-
-# Shill Detected
-# URLS of shill links to look out for to issue a warning message
-SHILL_DETECTOR: 'bitmex\.com\/register\/([a-zA-Z0-9]*)|cryptofacilities\.com\/derivatives\/([a-zA-Z0-9-_]*)|bitfinex\.com\/\?refcode=([a-zA-Z0-9]*)|simplefx\.com\/\?sfx-r=([a-zA-Z0-9-_]*)|1broker\.com\/\?c=en\/action\/r&i=([a-zA-Z0-9]*)|nitrogensports\.eu\/r\/([a-zA-Z0-9]*)|binance\.com\/\?ref=([a-zA-Z0-9]*)|deribit\.com\/reg-([a-zA-Z0-9\.]*)'
-# bitmex\.com\/register\/([a-zA-Z0-9]*)|
-# cryptofacilities\.com\/derivatives\/([a-zA-Z0-9-_]*)|
-# bitfinex\.com\/\?refcode=([a-zA-Z0-9]*)|
-# simplefx\.com\/\?sfx-r=([a-zA-Z0-9-_]*)|
-# 1broker\.com\/\?c=en\/action\/r&i=([a-zA-Z0-9]*)|
-# nitrogensports\.eu\/r\/([a-zA-Z0-9]*)|
-# binance\.com\/\?ref=([a-zA-Z0-9]*)|
-# deribit\.com\/reg-([a-zA-Z0-9\.]*)
-
-
-# List of matching shill links and their counter shill links to replace the offending messages with
-COUNTER_SHILL:
-
-  - title: 'Bitmex'
-    match: 'bitmex\.com\/register\/([a-zA-Z0-9]*)'
-    link : 'http://bitmex.whalepool.io'
-
-  - title: 'CryptoFacilities'
-    match: 'cryptofacilities\.com\/derivatives\/([a-zA-Z0-9-_]*)'
-    link : 'http://cryptofacilities.whalepool.io'
-
-  - title: 'Bitfinex'
-    match: 'cryptofacilities\.com\/derivatives\/([a-zA-Z0-9-_]*)'
-    link : 'http://bitfinex.whalepool.io'
-
-  - title: 'Simplefx'
-    match: 'simplefx\.com\/\?sfx-r=([a-zA-Z0-9-_]*)'
-    link : 'http://simplefx.whalepool.io'
-
-  - title: '1broker'
-    match: '1broker\.com\/\?c=en\/action\/r&i=([a-zA-Z0-9]*)'
-    link : 'http://1broker.whalepool.io'
-
-  - title: 'NitrogenSports'
-    match: 'nitrogensports\.eu\/r\/([a-zA-Z0-9]*)'
-    link : 'http://sports.whalepool.io'
-
-  - title: 'Binance'
-    match: 'binance\.com\/\?ref=([a-zA-Z0-9]*)'
-    link : 'http://binance.whalepool.io'
-
-  - title: 'Deribit'
-    match: 'deribit\.com\/reg-([a-zA-Z0-9\.]*)'
-    link : 'http://deribit.whalepool.io'
-
-
-
-
 MESSAGES:
 
   # The message displayed to new users when they join your room
@@ -98,8 +31,8 @@ MESSAGES:
   # If someone tries to use a command for the bot in a public channel
   # The bot will message the user telling them to pm them
   pmme:
-  - "Naughty naughty %s, you know we can't talk dirty in public. PM me for that kind of talk & house rules."
-  - "%s, some things a better left for behind closed doors. PM me for house rules."
+  - "Naughty naughty %s, you know we can't talk about this stuff in public. PM me for private talk."
+  - "%s, some things a better left for behind closed doors. PM me for private talk."
 
   # The 'welcome' message when users first initiate pm with the bot
   start: >
@@ -110,6 +43,10 @@ MESSAGES:
    /admins - See list of admins to contact for help*about the developers*.
    /location - Send location to the bot
    /price - Get todays' petrol price list
+   /nearest - Get the nearest petrol station
+   /nearestspc - get the nearest SPC petrol station
+   /nearestshell -get the nearest Shell petrol station
+   /nearestcal - Get the nearest Caltax Petrol station
    /comment - Leave your Feedback
 
   # The 'admin' extra control pannel welcome message
@@ -135,12 +72,12 @@ MESSAGES:
 
   # JSon list of admins for the '/admins' request page
   admins_json:
-    "@username1":
-      adminOf: "Room A and B"
-      about  : "this is blah about username1"
-    "@username2":
-      adminOf: "Room B and C "
-      about  : "this is blah about username2"
+    "@Dinesh":
+      adminOf: "Telegram API and Google API"
+      about  : "this is blah about Dinesh"
+    "@Amirul":
+      adminOf: "Database and Data Collection"
+      about  : "this is blah about Amirul"
 
   # Teamspeak info request 
   comment: > 
@@ -150,10 +87,51 @@ MESSAGES:
 
   # Price info request
   price: > 
-   Blah price blah 
+   Shell 95: $2.111
+   Shell 98: $2.222
+   Shell VP: $2.333
+   Shell Di: $1.111
+
+   SPC 92:   $2.111
+   SPC 95:   $2.222
+   SPC 98:   $2.333
+   SPC Di:   $1.111
+ 
+   ESSO 92:  $2.111
+   ESSO 95:  $2.222
+   ESSO 98:  $2.333
+   ESSO Di:  $1.111
+   
+   Prices were updated on:##/##/2018 
    
    /start - to go back to home
 
   # Location message
   location: > 
-   Blah teamspeak badges blah
+   Blah Location blah
+
+   /start - to go back to home
+
+  # nearest message
+  nearest: > 
+   We are working on this. We will get back to you ASAP. Sorry for the inconvenience!
+
+   /start - to go back to home
+
+  # nearestspc message
+  nearestspc: > 
+   Blah nearestspc blah
+
+   /start - to go back to home
+
+  # nearestshel message
+  nearestshell: > 
+   Blah nearestshell blah
+
+   /start - to go back to home
+
+  # nearestcal message
+  nearestcal: > 
+   Blah nearestcal blah
+
+   /start - to go back to home
