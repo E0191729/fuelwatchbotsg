@@ -3,11 +3,19 @@
 A simple telegram bot built with [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) to track down the best prices of fuel in your area!
 
 ### Commands 
--
+
+- /help
+- /aboutme
+- /best
+- /price
+- /nearest
+- /nearestspc
+- /nearestshel
+- /nearestcal
   
 
 ### Requirements
-
+Raspberry Pi 
 
 ### Setup Config
 
@@ -17,7 +25,12 @@ To run:
 `python3.6 .py`
 
 ### Credits
+[python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+[Scrapinghub](https://scrapinghub.com/)
 
 
 ### Contact
 You can open an issue here to contact us of any bugs!
+
+### Licensing
+Fuel Watch Bot (SG) is licensed under the Affero General Public License Version 3.
