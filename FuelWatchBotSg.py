@@ -127,9 +127,6 @@ def getid(bot, update):
     pprint(update.message.chat.__dict__, indent=4)
     update.message.reply_text(str(update.message.chat.first_name)+" :: "+str(update.message.chat.id))
 
-#URL = "https://storage.scrapinghub.com/items/324456/1/2/0?apikey=19b8c3bd229f43d9bc1c19f2b1f9074e&format=json"
-URL = "https://storage.scrapinghub.com/items/324456/2/3/0?apikey=19b8c3bd229f43d9bc1c19f2b1f9074e&format=json"
-
 def get_url(url):
     response = requests.get(url)
     content = {}
