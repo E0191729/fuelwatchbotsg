@@ -28,6 +28,7 @@ To run:
 ### Credits
 * [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 * [Scrapinghub](https://scrapinghub.com/)
+* [Whalepool](https://github.com/Whalepool)
 
 
 ### Contact
