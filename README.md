@@ -1,4 +1,4 @@
-# Fuel Watch Bot (SG)
+# Fuel Watch Bot (SG)- Work in progress
 
 A simple telegram bot built with [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) to track down the best prices of fuel in your area!
 
