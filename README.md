@@ -4,15 +4,16 @@ A simple telegram bot built with [python-telegram-bot](https://github.com/python
 
 ### Commands 
 
-- /help
-- /aboutme
-- /best
+- /start
+- /about
+- /admins
+- /location
 - /price
 - /nearest
 - /nearestspc
-- /nearestshel
+- /nearestshell
 - /nearestcal
-  
+- /comment  
 
 ### Requirements
 Raspberry Pi 
