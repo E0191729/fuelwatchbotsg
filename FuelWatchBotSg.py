@@ -1,7 +1,7 @@
 # fuelWatchBotSG *Work in progress
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# A Simple way to send a message to telegram
+
 import telegram
 from telegram import MessageEntity, TelegramObject, ChatAction, Location, ReplyKeyboardMarkup, ReplyKeyboardRemove
 import telegram.ext
