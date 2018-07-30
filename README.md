@@ -22,13 +22,14 @@ A simple telegram bot built with [python-telegram-bot](https://github.com/python
 
 ### Requirements
 Raspberry Pi 
+Telegram App
 
 ### Setup Config
 
 
 ### Usage
 To run:  
-`python3.6 .py`
+`python3 FuelWatchBotSg.py`
 
 ### Special Thanks
 * [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
