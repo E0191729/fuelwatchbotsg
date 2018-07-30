@@ -30,15 +30,15 @@ Raspberry Pi
 To run:  
 `python3.6 .py`
 
-### Credits
+### Special Thanks
 * [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 * [Parsehub](https://www.parsehub.com/)
 * [Whalepool](https://github.com/Whalepool)
 * [Google Places API](https://developers.google.com/places/web-service/intro)
 
 
-### Contact
-You can open an issue here to contact us of any bugs!
+### Contact/ Questions?
+Found a bug with Fuel Watch? Go ahead and submit an issue.
 
 ### Licensing
 Fuel Watch Bot (SG) is licensed under the [Affero General Public License Version 3](LICENSE).
