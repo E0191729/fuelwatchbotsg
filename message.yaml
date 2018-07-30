@@ -1,0 +1,117 @@
+MESSAGES:
+
+  # The message displayed to new users when they join your room
+  welcome:
+   - "Hi %s, welcome to the the Fuel Watch Bot"
+
+  # A special welcome message for an individually special room 
+  welcome_special: 'Welcome %s, this is a special chat group with a special welcome message'
+
+  # Goodbye messages when users leave your chat
+  goodbye:
+   - "Smells better without ya %s"
+   - "The average net worth of this group just shot up when %s left"
+   - "goodbye %s. It was fun while it lasted"
+   - "see ya %s, my sweet love"
+
+  # If someone tries to use a command for the bot in a public channel
+  # The bot will message the user telling them to pm them
+  pmme:
+  - "Naughty naughty %s, you know we can't talk about this stuff in public. PM me for private talk."
+  - "%s, some things a better left for behind closed doors. PM me for private talk."
+
+  # The 'welcome' message when users first initiate pm with the bot
+  start: >
+   Hi %s, Welcome to SgFuelWatch
+   Please click one of the links to see how i can help you:
+   /start - *Welcome message*
+   /about - about us*the purpose of the App and how to use it*
+   /admins - See list of admins to contact for help*about the developers*.
+   /location - Send location to the bot
+   /price - Get todays' petrol price list
+   /nearest - Get the nearest petrol station
+   /nearestspc - get the nearest SPC petrol station
+   /nearestshell -get the nearest Shell petrol station
+   /nearestcal - Get the nearest Caltax Petrol station
+   /nearestesso - Get the nearest ESSO Petrol station
+   /comment - Leave your Feedback
+
+  # The 'admin' extra control pannel welcome message
+  admin_start: >
+   %s, this is your admin control:
+   /getlog -get the full log all the events
+   
+  # About page
+  about: > 
+   *About X*
+   
+   blah blah abother function of Fuel watch and how to use it. 
+
+   /start - to go back to home
+
+
+  # JSon list of admins for the '/admins' request page
+  admins_json:
+    "@DineshDurai":
+      adminOf: "Telegram API and Google API"
+      about  : "this is blah about Dinesh. The number is only for hot girls, FYI: I'm single"
+    "@Amirul":
+      adminOf: "Database and Data Collection"
+      about  : "this is blah about Amirul"
+
+  # Teamspeak info request 
+  comment: > 
+   Blah comment blah 
+   
+   /start - to go back to home
+
+  # Price info request
+  price: > 
+   Shell 95: $2.111
+   Shell 98: $2.222
+   Shell VP: $2.333
+   Shell Di: $1.111
+
+   SPC 92:   $2.111
+   SPC 95:   $2.222
+   SPC 98:   $2.333
+   SPC Di:   $1.111
+ 
+   ESSO 92:  $2.111
+   ESSO 95:  $2.222
+   ESSO 98:  $2.333
+   ESSO Di:  $1.111
+   
+   Prices were updated on:##/##/2018 
+   
+   /start - to go back to home
+
+  # Location message
+  location: > 
+   Blah Location blah
+
+   /start - to go back to home
+
+  # nearest message
+  nearest: > 
+   We are working on this. We will get back to you ASAP. Sorry for the inconvenience!
+
+   /start - to go back to home
+
+  # nearestspc message
+  nearestspc: > 
+   Blah nearestspc blah
+
+   /start - to go back to home
+
+  # nearestshel message
+  nearestshell: > 
+   Blah nearestshell blah
+
+   /start - to go back to home
+
+  # nearestcal message
+  nearestcal: > 
+   Blah nearestcal blah
+
+   /start - to go back to home
