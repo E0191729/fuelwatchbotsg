@@ -25,7 +25,7 @@ Raspberry Pi
 Telegram App
 
 ### Setup Config
-
+requirements.pip
 
 ### Usage
 To run:  
