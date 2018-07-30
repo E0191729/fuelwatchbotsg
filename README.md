@@ -34,6 +34,7 @@ To run:
 * [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 * [Parsehub](https://www.parsehub.com/)
 * [Whalepool](https://github.com/Whalepool)
+* [Google Places API](https://developers.google.com/places/web-service/intro)
 
 
 ### Contact
