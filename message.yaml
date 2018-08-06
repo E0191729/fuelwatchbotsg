@@ -22,18 +22,18 @@ MESSAGES:
 
   # The 'welcome' message when users first initiate pm with the bot
   start: >
-   Hi %s, Welcome to SgFuelWatch
-   Please click one of the links to see how i can help you:
-   /start - *Welcome message*
-   /about - about us*the purpose of the App and how to use it*
-   /admins - See list of admins to contact for help*about the developers*.
-   /location - Send location to the bot
-   /price - Get todays' petrol price list
-   /nearest - Get the nearest petrol station
-   /nearestspc - get the nearest SPC petrol station
-   /nearestshell -get the nearest Shell petrol station
-   /nearestcal - Get the nearest Caltax Petrol station
-   /nearestesso - Get the nearest ESSO Petrol station
+   Hi %s, Welcome to *Fuel Watch Bot (SG)*\n
+   This are the commands I currently support:
+   /start - Welcome console\n
+   /about - About us\n
+   /admins - List of admins/developers\n
+   /location - Update location to bot\n
+   /price - Get todays' petrol price list\n
+   /nearest - Get the nearest petrol station\n
+   /nearestspc - List nearest 5 SPC petrol station\n
+   /nearestshell -List nearest 5 Shell petrol station\n
+   /nearestcal - List nearest 5 Caltex petrol station\n
+   /nearestesso - List nearest Esso petrol station\n
    /comment - Leave your Feedback
 
   # The 'admin' extra control pannel welcome message
