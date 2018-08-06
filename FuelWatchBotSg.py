@@ -293,7 +293,7 @@ def price(bot, update):
 	info = { 'user_id': user_id, 'request': 'price', 'timestamp': timestamp }
 	dataLoger(info)
 	#db.pm_requests.insert(info)
-	msg = "*FuelWatchSGBot Price*\n"
+	msg = "*Price list:*\n"
 	#print (price_list[3])
 	msg += price_list[3]
 	#msg += price_list.text
@@ -315,7 +315,7 @@ def admins(bot, update):
 	        msg = random.choice(MESSAGES['pmme']) % (name)
 	        bot.sendMessage(chat_id=chat_id,text=msg,reply_to_message_id=message_id, parse_mode="Markdown",disable_web_page_preview=1) 
 	else:
-	        msg = "*FuelWatchSGBot Admins*\n\n"
+	        msg = "*Fuel Watch Bot (SG) Admins*\n\n"
 	        keys = list(ADMINS_JSON.keys())
 	        random.shuffle(keys)
 	        for k in keys: 
@@ -386,7 +386,7 @@ def location_checker(bot, update):
 	            locationHolder[user_id] = [user_location.latitude , user_location.longitude]
 	            print (locationHolder[user_id][0] ,  locationHolder[user_id][1])
 	        else:
-	            bot.sendMessage(chat_id=chat_id,text="Pleace share you location to try our Search Function.",parse_mode="Markdown",disable_web_page_preview=1)
+	            bot.sendMessage(chat_id=chat_id,text="Please share your location to find nearest petrol stations.",parse_mode="Markdown",disable_web_page_preview=1)
 	            location_keyboard = telegram.KeyboardButton(text="send_location", request_location=True)
 	            contact_keyboard = telegram.KeyboardButton(text="send_contact", request_contact=True)
 	            custom_keyboard = [[ location_keyboard]]
