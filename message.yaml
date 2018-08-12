@@ -54,7 +54,7 @@ MESSAGES:
   admins_json:
     "@DineshDurai":
       adminOf: "Telegram API and Google API"
-      about  : "this is blah about Dinesh. The number is only for hot girls, FYI: I'm single"
+      about  : "this is blah about Dinesh."
     "@Amirul":
       adminOf: "Database and Data Collection"
       about  : "this is blah about Amirul"
