@@ -22,30 +22,67 @@ MESSAGES:
 
   # The 'welcome' message when users first initiate pm with the bot
   start: >
-   Hi %s, Welcome to *Fuel Watch Bot (SG)*\n
+   Hi %s, Welcome to SgFuelWatch
    This are the commands I currently support:
-   /start - Welcome console\n
-   /about - About us\n
-   /admins - List of admins/developers\n
-   /location - Update location to bot\n
-   /price - Get todays' petrol price list\n
-   /nearest - Get the nearest petrol station\n
-   /nearestspc - List nearest 5 SPC petrol station\n
-   /nearestshell -List nearest 5 Shell petrol station\n
-   /nearestcal - List nearest 5 Caltex petrol station\n
-   /nearestesso - List nearest Esso petrol station\n
-   /comment - Leave your Feedback
+
+   1) /start - Welcome console
+
+   2) /about - About us
+
+   3) /admins - List of admins/developers
+
+   4) /updateLocation - Update location to bot
+
+   5) /price - Get todays' petrol price list
+
+   6) /nearest - Get the nearest 5 petrol station
+
+   7) /nearestspc - List nearest 5 SPC petrol station
+
+   8) /nearestshell -List nearest 5 Shell petrol station
+
+   9) /nearestcal - List nearest 5 Caltex petrol station
+
+   10) /nearestesso - List nearest 5 Esso petrol station
+
+   11) /comment - Leave your Feedback
 
   # The 'admin' extra control pannel welcome message
   admin_start: >
    %s, this is your admin control:
+
    /getlog -get the full log all the events
+
+   /shutdown -Shutdown the server/Bot
    
   # About page
   about: > 
-   *About X*
+   *ABOUT US*
+
+
+   *Fuel Watch Bot(SG)* is a simple bot that bring you the latest updates of Singapore's petrol price. Compare petrol price offered by different petrol companies! We support all major brands and fuel types.
+
+
+   Bot features
+
+   1. Look for the nearest fuel station from current location
+
+   2. List of fuel prices by brands
+
+
+   Brands include:
    
-   blah blah abother function of Fuel watch and how to use it. 
+   1) Shell
+
+   2) SPC
+
+   3) Esso
+
+   4) Caltex
+
+
+   '#' All data are best effort.
+
 
    /start - to go back to home
 
@@ -57,11 +94,14 @@ MESSAGES:
       about  : "this is blah about Dinesh."
     "@Amirul":
       adminOf: "Database and Data Collection"
-      about  : "this is blah about Amirul"
+      about  : "this is blah about Amirul."
 
   # Teamspeak info request 
   comment: > 
-   Blah comment blah 
+   Pls Send your comments directly to the admins or to the github page: 
+
+   https://github.com/E0191729/fuelwatchbotsg/issues .
+
    
    /start - to go back to home
 
@@ -88,7 +128,18 @@ MESSAGES:
 
   # Location message
   location: > 
-   Blah Location blah
+   Location updated :) You can send the following request now.
+   
+   1) /nearest
+   
+   2) /nearestspc
+
+   3) /nearestshell
+ 
+   4) /nearestcal
+
+   5) /nearestesso
+
 
    /start - to go back to home
 
@@ -113,5 +164,11 @@ MESSAGES:
   # nearestcal message
   nearestcal: > 
    Blah nearestcal blah
+
+   /start - to go back to home
+
+  unknown: >
+   Sorry %s. I didn't understand the Message that was sent earlier.
+
 
    /start - to go back to home

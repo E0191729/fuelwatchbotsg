@@ -15,6 +15,7 @@ from pathlib import Path
 from dateutil.relativedelta import relativedelta
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from PIL import Image
+from subprocess import call
 
 import numpy as np
 import argparse
@@ -68,9 +69,7 @@ BOTNAME                     = config['FUELWATCHSG_BOT_USERNAME']
 TELEGRAM_BOT_TOKEN          = config['FUELWATCHSG_BOT_TOKEN']
 FORWARD_PRIVATE_MESSAGES_TO = config['BOT_OWNER_ID'] 
 ADMINS                      = config['ADMINS']
-GOOGLE_PLACE_API_KEY	    = config['GOOGLE_API_KEY']
-PARSEHUB_API_KEY	    = config['PARSE_API_KEY']
-PARSEHUB_PROJECT_KEY	    = config['PROJECT_KEY']
+GOOGLE_PLACE_API_KEY		= config['GOOGLE_API_KEY']
 
 config_file = PATH+'/message.yaml'
 my_file     = Path(config_file)
@@ -81,29 +80,7 @@ else:
 	pprint('message.yaml file does not exists.')
 	sys.exit()
 
-
 price_list = {}
-'''
-params = {
-"api_key": PARSEHUB_API_KEY,
-"format": "csv"
-}
-r = requests.get('https://www.parsehub.com/api/v2/projects/'+PARSEHUB_PROJECT_KEY+'/last_ready_run/data', params=params)
-print(r.text)
-print ("########\n")
-count = 0
-for row in r:
-	price_list[count] = row
-	count =count +1
-	print (row)
-msg = "\n"
-
-price_list =r.text
-for k in range(0, 2):
-	msg += price_list[0][k]+" : "
-	msg += price_list[1][k] +"\n"
-price_list[3] = msg
-'''
 filename = 'run_results_full.csv'
 with open(filename, "rt", encoding='utf8') as f:
     reader = csv.reader(f)
@@ -139,43 +116,9 @@ MESSAGES['nearest']           	= config['MESSAGES']['nearest']
 MESSAGES['nearestspc']          = config['MESSAGES']['nearestspc']
 MESSAGES['nearestshell']        = config['MESSAGES']['nearestshell']
 MESSAGES['nearestcal']        	= config['MESSAGES']['nearestcal']
+MESSAGES['unknown']		= config['MESSAGES']['unknown']
 
 ADMINS_JSON                 	= config['MESSAGES']['admins_json']
-
-
-#Grabbing and parsing the JSON data
-def GoogPlac(chat_id,lat,lng,name):
-  #making the url 
-  AUTH_KEY = GOOGLE_PLACE_API_KEY
-  LOCATION = str(lat) + "," + str(lng)
-  RANKBY = 'distance'
-  TYPES = 'gas_station'
-  #if name == '': 
-  	#name = 'false'
-  MyUrl = ('https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-           '?location=%s'
-           '&rankby=%s'
-           '&types=%s'
-           '&keyword=%s'
-           '&sensor=false&key=%s') % (LOCATION, RANKBY, TYPES, name , AUTH_KEY)
-  #grabbing the JSON result
-  response = urllib.request.urlopen(MyUrl)
-  jsonRaw = response.read()
-  jsonData = json.loads(jsonRaw.decode('utf-8'))
-
-  IterJson(chat_id,jsonData["results"])
-
-def IterJson(chat_id,Data):
-  count = 0
-  for place in Data:
-  #for place in range(6):
-  	if count < 5:
-  		x = [place['name'], place['reference'], place['geometry']['location']['lat'],place['geometry']['location']['lng'], place['vicinity'],place['types']]
-  		print (x)
-  		msg = x
-  		#if msg[0]
-  		bot.sendVenue(chat_id,msg[2],msg[3],msg[0],msg[4])
-  		count = count +1
 
 #################################
 # Begin bot.. 
@@ -230,11 +173,14 @@ def get_url(url):
 	print (content)
 	js = json.loads(content)
 	return js
-def dataLoger(data):
-	config_file = PATH+'/localDataBase.txt'
-	db = open(config_file,"a+")
-	db.write("\n" + str(data))
+# Local DataBase logger
+def log(info):
+ 	#db = open("/home/pi/fuelwatchbotsg-master/localDataBase.txt","a+")
+	db = open("/home/dinboy/fuelwatchbotsg-master/localDataBase.txt","a+")
+	db.write("\n" + str(info))
 	db.close()
+	#db.write(str(info)) #https://www.guru99.com/reading-and-writing-files-in-python.html
+	#db.pm_requests.insert(info)
 
 # Welcome message 
 def start(bot, update):
@@ -255,11 +201,11 @@ def start(bot, update):
 	    msg = MESSAGES['welcome']
 
 	    timestamp = datetime.datetime.utcnow()
-	    info = { 'user_id': user_id, 'name': name, 'request': 'start', 'timestamp': timestamp }
-	    dataLoger(info)
-	    msg = bot.sendMessage(chat_id=chat_id, text=(MESSAGES['start'] % name),parse_mode="Markdown",disable_web_page_preview=1)            
+	    info = { 'user_id': user_id, 'request': 'start', 'timestamp': timestamp }
+	    log(info)
+	    bot.sendMessage(chat_id=chat_id, text=(MESSAGES['start'] % name),parse_mode="Markdown",disable_web_page_preview=1)            
 	    if user_id in ADMINS:
-	        msg = bot.sendMessage(chat_id=chat_id, text=(MESSAGES['admin_start'] % name),parse_mode="Markdown",disable_web_page_preview=1)
+	        bot.sendMessage(chat_id=chat_id, text=(MESSAGES['admin_start'] % name),parse_mode="Markdown",disable_web_page_preview=1)
 
 # Message about the Bot
 def about(bot, update):
@@ -277,7 +223,6 @@ def about(bot, update):
 		msg = MESSAGES['about']
 		timestamp = datetime.datetime.utcnow()
 		info = { 'user_id': user_id, 'request': 'about', 'timestamp': timestamp }
-		dataLoger(info)
 		#db.pm_requests.insert(info)
 		bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
 
@@ -291,12 +236,10 @@ def price(bot, update):
 	logger.info("/price - "+name)
 	timestamp = datetime.datetime.utcnow()
 	info = { 'user_id': user_id, 'request': 'price', 'timestamp': timestamp }
-	dataLoger(info)
 	#db.pm_requests.insert(info)
-	msg = "*Price list:*\n"
-	#print (price_list[3])
+	msg = "*FuelWatchSGBot Price*\n"
+	print (price_list[3])
 	msg += price_list[3]
-	#msg += price_list.text
 	msg += "\n /start - to go back to home"
 	bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="HTML",disable_web_page_preview=1)
 	#ScrapData_JSON = get_url(URL)
@@ -315,7 +258,7 @@ def admins(bot, update):
 	        msg = random.choice(MESSAGES['pmme']) % (name)
 	        bot.sendMessage(chat_id=chat_id,text=msg,reply_to_message_id=message_id, parse_mode="Markdown",disable_web_page_preview=1) 
 	else:
-	        msg = "*Fuel Watch Bot (SG) Admins*\n\n"
+	        msg = "*FuelWatchSGBot Admins*\n\n"
 	        keys = list(ADMINS_JSON.keys())
 	        random.shuffle(keys)
 	        for k in keys: 
@@ -327,7 +270,6 @@ def admins(bot, update):
 
 	        timestamp = datetime.datetime.utcnow()
 	        info = { 'user_id': user_id, 'request': 'admins', 'timestamp': timestamp }
-		#dataLoger(info)
 	        #db.pm_requests.insert(info)
 
 	        bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
@@ -348,7 +290,6 @@ def comment(bot, update):
 
 	        timestamp = datetime.datetime.utcnow()
 	        info = { 'user_id': user_id, 'request': 'comment', 'timestamp': timestamp }
-		#dataLoger(info)
 	        #db.pm_requests.insert(info)
 
 	        #bot.sendSticker(chat_id=chat_id, sticker="CAADBAADqgIAAndCvAiTIPeFFHKWJQI", disable_notification=False)
@@ -370,7 +311,6 @@ def location_checker(bot, update):
 	        
 	        timestamp = datetime.datetime.utcnow()
 	        info = { 'user_id': user_id, 'request': 'location', 'timestamp': timestamp }
-		#dataLoger(info)
 	        #db.pm_requests.insert(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
@@ -380,7 +320,7 @@ def location_checker(bot, update):
 	        if user_location != None:
 	            logger.info("Location of %s: %f / %f", user.first_name, user_location.latitude,user_location.longitude)
 	            reply_markup = telegram.ReplyKeyboardRemove(remove_keyboard=True)
-	            bot.send_message(chat_id=chat_id,text="Location updated :) You can send your request now.",reply_markup=reply_markup)
+	            bot.send_message(chat_id=chat_id,text=msg,reply_markup=reply_markup)
 	            ## send back users location
 				
 	            locationHolder[user_id] = [user_location.latitude , user_location.longitude]
@@ -408,7 +348,6 @@ def nearest(bot, update):
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
 	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-		#dataLoger(info)
 	        #db.pm_requests.insert(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
@@ -429,7 +368,7 @@ def nearestSpc(bot, update):
 	chat_id = update.message.chat.id
 	message_id = update.message.message_id
 	name = get_name(update.message.from_user)
-	logger.info("/nearestSPC - "+name)
+	logger.info("/nearest - "+name)
 	
 	if (update.message.chat.type == 'group') or (update.message.chat.type == 'supergroup'):
 	        msg = random.choice(MESSAGES['pmme']) % (name)
@@ -437,9 +376,8 @@ def nearestSpc(bot, update):
 	else:
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'nearestSPC', 'timestamp': timestamp }
-		#dataLoger(info)	        
-		#db.pm_requests.insert(info)
+	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
+	        #db.pm_requests.insert(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
 	        user = update.message.from_user
@@ -469,7 +407,6 @@ def nearestShell(bot, update):
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
 	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-		#dataLoger(info)
 	        #db.pm_requests.insert(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
@@ -500,7 +437,6 @@ def nearestCal(bot, update):
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
 	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-		#dataLoger(info)
 	        #db.pm_requests.insert(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
@@ -531,7 +467,6 @@ def nearestEsso(bot, update):
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
 	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-		#dataLoger(info)
 	        #db.pm_requests.insert(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
@@ -547,9 +482,43 @@ def nearestEsso(bot, update):
 	        	
 	        msg = MESSAGES['nearest']
 	        #bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
+
+
+#Grabbing and parsing the JSON data
+def GoogPlac(chat_id,lat,lng,name):
+  #making the url 
+  AUTH_KEY = GOOGLE_PLACE_API_KEY
+  LOCATION = str(lat) + "," + str(lng)
+  RANKBY = 'distance'
+  TYPES = 'gas_station'
+  #if name == '': 
+  	#name = 'false'
+  MyUrl = ('https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+           '?location=%s'
+           '&rankby=%s'
+           '&types=%s'
+           '&keyword=%s'
+           '&sensor=false&key=%s') % (LOCATION, RANKBY, TYPES, name , AUTH_KEY)
+  #grabbing the JSON result
+  response = urllib.request.urlopen(MyUrl)
+  jsonRaw = response.read()
+  jsonData = json.loads(jsonRaw.decode('utf-8'))
+
+  IterJson(chat_id,jsonData["results"])
+
+def IterJson(chat_id,Data):
+  count = 0
+  for place in Data:
+  #for place in range(6):
+  	if count < 5:
+  		x = [place['name'], place['reference'], place['geometry']['location']['lat'],place['geometry']['location']['lng'], place['vicinity'],place['types']]
+  		print (x)
+  		msg = x
+  		#if msg[0]
+  		bot.sendVenue(chat_id,msg[2],msg[3],msg[0],msg[4])
+  		count = count +1
   
 def goodbye(bot, update):
-
 	user_id = update.message.from_user.id 
 	chat_id = update.message.chat.id
 	message_id = update.message.message_id
@@ -563,14 +532,34 @@ def goodbye(bot, update):
 		msg = MESSAGES['goodbye']
 		timestamp = datetime.datetime.utcnow()
 		info = { 'user_id': user_id, 'request': 'goodbye', 'timestamp': timestamp }
-		#dataLoger(info)
 		#db.pm_requests.insert(info)
 		bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
 
 
+# Unknown message reply
+def unknown(bot, update):
+
+	user_id = update.message.from_user.id 
+	chat_id = update.message.chat.id
+	message_id = update.message.message_id
+	name = get_name(update.message.from_user)
+	logger.info("/unknown - "+name)
+
+	if (update.message.chat.type == 'group') or (update.message.chat.type == 'supergroup'):
+		msg = random.choice(MESSAGES['pmme']) % (name)
+		bot.sendMessage(chat_id=chat_id,text=msg,reply_to_message_id=message_id, parse_mode="Markdown",disable_web_page_preview=1) 
+	else:
+		msg = MESSAGES['unknown']
+		timestamp = datetime.datetime.utcnow()
+		info = { 'user_id': user_id, 'request': 'about', 'timestamp': timestamp }
+		bot.sendMessage(chat_id=chat_id, text=(msg % name),parse_mode="Markdown",disable_web_page_preview=1)            
 
 ####################################################
 # ADMIN FUNCTIONS
+@restricted
+def shutdown(bot,update):
+    call("sudo shutdown -h now", shell=True)
+    
 @restricted
 def getlog(bot,update):
     #ipdate Pi's IP address to the log
@@ -579,11 +568,13 @@ def getlog(bot,update):
     s.connect(("8.8.8.8",80))
     ip_address = s.getsockname()[0]
     s.close()
-    #db = open("/home/pi/fuelwatchbotsg-master/localDataBase.txt","a+")
-    #db.write("Admin Request: Telebot is up with a IP Address of:" + ip_address)
-    #db.close()
+    #Database update
+    db = open("/home/pi/fuelwatchbotsg-master/localDataBase.txt","a+")
+    db.write("Admin Request: Telebot is up with a IP Address of:" + ip_address)
+    db.close()
     chat_id = update.message.chat.id
     bot.sendDocument(chat_id=chat_id, document=open('/home/pi/fuelwatchbotsg-master/localDataBase.txt', 'rb'))	
+
 	
 #################### End of Admin commands
 	
@@ -615,7 +606,7 @@ dp.add_handler(CommandHandler('id', getid))
 dp.add_handler(CommandHandler('start', start))
 dp.add_handler(CommandHandler('about', about))
 dp.add_handler(CommandHandler('admins', admins))
-dp.add_handler(CommandHandler('location', location_checker))
+dp.add_handler(CommandHandler('updateLocation', location_checker))
 dp.add_handler(CommandHandler('price', price))
 dp.add_handler(CommandHandler('comment', comment))
 dp.add_handler(CommandHandler('nearest', nearest))
@@ -627,6 +618,8 @@ dp.add_handler(CommandHandler('goodbye', goodbye))
 
 #Admin Commands
 dp.add_handler(CommandHandler('getlog', getlog))
+dp.add_handler(CommandHandler('shutdown', shutdown))
+
 '''
 dp.add_handler(CommandHandler('commandstats',commandstats))
 dp.add_handler(CommandHandler('locationstats',locationstats))
@@ -639,14 +632,15 @@ dp.add_handler(CommandHandler('promotets', promotets))
 # Location message
 dp.add_handler(MessageHandler(Filters.location, location_checker))
 
+### Unknown Even Handler
 # Photo message
-#dp.add_handler(MessageHandler(Filters.photo, photo_message))
-
+dp.add_handler(MessageHandler(Filters.photo, unknown))
 # Sticker message
-#dp.add_handler(MessageHandler(Filters.sticker, sticker_message))
-
+dp.add_handler(MessageHandler(Filters.sticker, unknown))
 # Normal Text chat
-#dp.add_handler(MessageHandler(Filters.text, echo))
+dp.add_handler(MessageHandler(Filters.text, unknown))
+# Unknown Command 
+dp.add_handler(MessageHandler([Filters.command], unknown))
 
 
 # log all errors
