@@ -175,8 +175,8 @@ def get_url(url):
 	return js
 # Local DataBase logger
 def log(info):
- 	#db = open("/home/pi/fuelwatchbotsg-master/localDataBase.txt","a+")
-	db = open("/home/dinboy/fuelwatchbotsg-master/localDataBase.txt","a+")
+ 	#db = open("/home/dinboy/fuelwatchbotsg-master/localDataBase.txt","a+")
+	db = open("/home/pi/fuelwatchbotsg-master/localDataBase.txt","a+")
 	db.write("\n" + str(info))
 	db.close()
 	#db.write(str(info)) #https://www.guru99.com/reading-and-writing-files-in-python.html
@@ -201,7 +201,7 @@ def start(bot, update):
 	    msg = MESSAGES['welcome']
 
 	    timestamp = datetime.datetime.utcnow()
-	    info = { 'user_id': user_id, 'request': 'start', 'timestamp': timestamp }
+	    info = { 'user_name': name ,'user_id': user_id, 'request': 'start', 'timestamp': timestamp }
 	    log(info)
 	    bot.sendMessage(chat_id=chat_id, text=(MESSAGES['start'] % name),parse_mode="Markdown",disable_web_page_preview=1)            
 	    if user_id in ADMINS:
@@ -222,8 +222,8 @@ def about(bot, update):
 	else:
 		msg = MESSAGES['about']
 		timestamp = datetime.datetime.utcnow()
-		info = { 'user_id': user_id, 'request': 'about', 'timestamp': timestamp }
-		#db.pm_requests.insert(info)
+		info = { 'user_name': name ,'user_id': user_id, 'request': 'about', 'timestamp': timestamp }
+		log(info)
 		bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
 
 # Bot will reply with the datas from the database
@@ -235,8 +235,8 @@ def price(bot, update):
 	name = get_name(update.message.from_user)
 	logger.info("/price - "+name)
 	timestamp = datetime.datetime.utcnow()
-	info = { 'user_id': user_id, 'request': 'price', 'timestamp': timestamp }
-	#db.pm_requests.insert(info)
+	info = { 'user_name': name ,'user_id': user_id, 'request': 'price', 'timestamp': timestamp }
+	log(info)
 	msg = "*FuelWatchSGBot Price*\n"
 	print (price_list[3])
 	msg += price_list[3]
@@ -269,9 +269,8 @@ def admins(bot, update):
 	        msg += "/start - to go back to home"
 
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'admins', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
-
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'admins', 'timestamp': timestamp }
+	        log(info)
 	        bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
 
 def comment(bot, update):
@@ -287,12 +286,9 @@ def comment(bot, update):
 	        bot.sendMessage(chat_id=chat_id,text=msg,reply_to_message_id=message_id, parse_mode="Markdown",disable_web_page_preview=1) 
 	else:
 	        msg = MESSAGES['comment']
-
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'comment', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
-
-	        #bot.sendSticker(chat_id=chat_id, sticker="CAADBAADqgIAAndCvAiTIPeFFHKWJQI", disable_notification=False)
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'comment', 'timestamp': timestamp }
+	        log(info)
 	        bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
 
 
@@ -310,8 +306,8 @@ def location_checker(bot, update):
 	        msg = MESSAGES['location']
 	        
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'location', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'location', 'timestamp': timestamp }
+	        log(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
 	        user = update.message.from_user
@@ -347,8 +343,8 @@ def nearest(bot, update):
 	else:
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
+	        log(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
 	        user = update.message.from_user
@@ -368,7 +364,7 @@ def nearestSpc(bot, update):
 	chat_id = update.message.chat.id
 	message_id = update.message.message_id
 	name = get_name(update.message.from_user)
-	logger.info("/nearest - "+name)
+	logger.info("/nearestSpc - "+name)
 	
 	if (update.message.chat.type == 'group') or (update.message.chat.type == 'supergroup'):
 	        msg = random.choice(MESSAGES['pmme']) % (name)
@@ -376,8 +372,8 @@ def nearestSpc(bot, update):
 	else:
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'nearestSpc', 'timestamp': timestamp }
+	        log(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
 	        user = update.message.from_user
@@ -398,7 +394,7 @@ def nearestShell(bot, update):
 	chat_id = update.message.chat.id
 	message_id = update.message.message_id
 	name = get_name(update.message.from_user)
-	logger.info("/nearest - "+name)
+	logger.info("/nearestShell - "+name)
 	
 	if (update.message.chat.type == 'group') or (update.message.chat.type == 'supergroup'):
 	        msg = random.choice(MESSAGES['pmme']) % (name)
@@ -406,8 +402,8 @@ def nearestShell(bot, update):
 	else:
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'nearestShell', 'timestamp': timestamp }
+	        log(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
 	        user = update.message.from_user
@@ -428,7 +424,7 @@ def nearestCal(bot, update):
 	chat_id = update.message.chat.id
 	message_id = update.message.message_id
 	name = get_name(update.message.from_user)
-	logger.info("/nearest - "+name)
+	logger.info("/nearestCal - "+name)
 	
 	if (update.message.chat.type == 'group') or (update.message.chat.type == 'supergroup'):
 	        msg = random.choice(MESSAGES['pmme']) % (name)
@@ -436,8 +432,8 @@ def nearestCal(bot, update):
 	else:
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'nearestCal', 'timestamp': timestamp }
+	        log(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
 	        user = update.message.from_user
@@ -458,7 +454,7 @@ def nearestEsso(bot, update):
 	chat_id = update.message.chat.id
 	message_id = update.message.message_id
 	name = get_name(update.message.from_user)
-	logger.info("/nearest - "+name)
+	logger.info("/nearestEsso - "+name)
 	
 	if (update.message.chat.type == 'group') or (update.message.chat.type == 'supergroup'):
 	        msg = random.choice(MESSAGES['pmme']) % (name)
@@ -466,8 +462,8 @@ def nearestEsso(bot, update):
 	else:
 	        msg = MESSAGES['nearest']
 	        timestamp = datetime.datetime.utcnow()
-	        info = { 'user_id': user_id, 'request': 'nearest', 'timestamp': timestamp }
-	        #db.pm_requests.insert(info)
+	        info = { 'user_name': name ,'user_id': user_id, 'request': 'nearestEsso', 'timestamp': timestamp }
+	        log(info)
 	        user = update.message.from_user
 	        user_location = update.message.location
 	        user = update.message.from_user
@@ -531,8 +527,8 @@ def goodbye(bot, update):
 	else:
 		msg = MESSAGES['goodbye']
 		timestamp = datetime.datetime.utcnow()
-		info = { 'user_id': user_id, 'request': 'goodbye', 'timestamp': timestamp }
-		#db.pm_requests.insert(info)
+		info = { 'user_name': name ,'user_id': user_id, 'request': 'goodbye', 'timestamp': timestamp }
+		log(info)
 		bot.sendMessage(chat_id=chat_id,text=msg,parse_mode="Markdown",disable_web_page_preview=1) 
 
 
@@ -551,7 +547,8 @@ def unknown(bot, update):
 	else:
 		msg = MESSAGES['unknown']
 		timestamp = datetime.datetime.utcnow()
-		info = { 'user_id': user_id, 'request': 'about', 'timestamp': timestamp }
+		info = { 'user_name': name ,'user_id': user_id, 'request': 'unknown', 'timestamp': timestamp }
+		log(info)
 		bot.sendMessage(chat_id=chat_id, text=(msg % name),parse_mode="Markdown",disable_web_page_preview=1)            
 
 ####################################################
