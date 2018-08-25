@@ -323,8 +323,7 @@ def location_checker(bot, update):
 	            print (locationHolder[user_id][0] ,  locationHolder[user_id][1])
 	        else:
 	            bot.sendMessage(chat_id=chat_id,text="Please share your location to find nearest petrol stations.",parse_mode="Markdown",disable_web_page_preview=1)
-	            location_keyboard = telegram.KeyboardButton(text="send_location", request_location=True)
-	            contact_keyboard = telegram.KeyboardButton(text="send_contact", request_contact=True)
+	            location_keyboard = telegram.KeyboardButton(text="Send Location", request_location=True)
 	            custom_keyboard = [[ location_keyboard]]
 	            reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
 	            bot.send_message(chat_id=chat_id,text="Would you mind sharing your location with me?",reply_markup=reply_markup)

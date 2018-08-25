@@ -22,12 +22,12 @@ MESSAGES:
 
   # The 'welcome' message when users first initiate pm with the bot
   start: >
-   Hi %s, Welcome to SgFuelWatch
+   Hi %s, Welcome to Fuel Watch Bot (SG)
    This are the commands I currently support:
 
    1) /start - Welcome console
 
-   2) /about - About us
+   2) /about - What can this Bot do?
 
    3) /admins - List of admins/developers
 
