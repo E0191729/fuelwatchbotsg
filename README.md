@@ -31,9 +31,6 @@ requirements.pip
 To run:  
 `python3 FuelWatchBotSg.py`
 
-### Contributors
-* Anton Andreivsky 
-
 ### Special Thanks
 * [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 * [Parsehub](https://www.parsehub.com/)
