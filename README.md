@@ -18,10 +18,10 @@ A simple telegram bot built with [python-telegram-bot](https://github.com/python
 
 ### Admin Commands
 - /getlog        (Logs Telegram user id, Name, Request, Date and time)
-- /shutdown        (Shutdown Raspberry Pi)
+- /shutdown        (Shutdown Server remotely)
 
 ### Requirements
-Raspberry Pi 
+Linux Instance 
 Telegram App
 
 ### Setup Config
