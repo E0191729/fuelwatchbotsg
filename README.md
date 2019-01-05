@@ -21,7 +21,7 @@ A simple telegram bot built with [python-telegram-bot](https://github.com/python
 - /shutdown        (Shutdown Raspberry Pi)
 
 ### Requirements
-Raspberry Pi 
+Linux Instance 
 Telegram App
 
 ### Setup Config
